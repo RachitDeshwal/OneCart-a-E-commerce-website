@@ -7,7 +7,7 @@ import Card from "../components/Card";
 
 const Collection = () => {
   const [showFilters, setShowFilters] = useState(false);
-  let { products } = useShopContext();
+  let { products, search, showSearch } = useShopContext();
   const [filterProduct, setFilterProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
@@ -28,6 +28,11 @@ const Collection = () => {
   };
   const applyFilters = () => {
     let productCopy = products.slice();
+    if (showSearch && search) {
+      productCopy = productCopy.filter((item) =>
+        item.name.toLowerCase().includes(search)
+      );
+    }
     if (category.length > 0) {
       productCopy = productCopy.filter((item) =>
         category.includes(item.category)
@@ -62,11 +67,11 @@ const Collection = () => {
   }, [products]);
   useEffect(() => {
     applyFilters();
-  }, [category, subCategory]);
+  }, [category, subCategory, showSearch, search]);
 
   return (
-    <div className="w-[100vw] min-h-[100vh] flex flex-col justify-start items-start bg-gradient-to-l from-[#141414] to-[#0c2025] md:flex-row pt-[70px] overflow-x-hidden z-[2] ">
-      <div className="md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vw] p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed">
+    <div className="w-[100vw]  min-h-[100vh] flex flex-col justify-start items-start bg-gradient-to-l from-[#141414] to-[#0c2025] md:flex-row pt-[70px] overflow-x-hidden z-[2] ">
+      <div className="md:w-[30vw]  lg:w-[20vw] w-[100vw] md:min-h-[100vw] p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed">
         <p
           className="text-[25px] font-semibold flex gap-[5px] cursor-pointer items-center justify-start"
           onClick={() => setShowFilters((prev) => !prev)}
@@ -169,7 +174,7 @@ const Collection = () => {
             </option>
           </select>
         </div>
-        <div className="lg:w-[80vw] md:w-[60vw] w-[100vw] min-h-[70vh] flex justify-center items-center flex-wrap gap-[30px]">
+        <div className="lg:w-[80vw] mb-[110px] md:w-[60vw] w-[100vw] min-h-[70vh] flex justify-center items-center flex-wrap gap-[30px]">
           {filterProduct.map((item, index) => (
             <Card
               id={item._id}

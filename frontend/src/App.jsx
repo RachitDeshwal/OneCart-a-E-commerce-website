@@ -9,6 +9,8 @@ import Collection from "./Pages/Collection.jsx";
 import About from "./Pages/About.jsx";
 import Contact from "./Pages/Contact.jsx";
 import Product from "./Pages/Product.jsx";
+import ProductDetail from "./Pages/ProductDetail.jsx";
+import Cart from "./Pages/Cart.jsx";
 
 function App() {
   const { userData } = useUserContext();
@@ -80,6 +82,26 @@ function App() {
           element={
             userData ? (
               <Product />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
+        <Route
+          path="/productdetail/:productId"
+          element={
+            userData ? (
+              <ProductDetail />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            userData ? (
+              <Cart />
             ) : (
               <Navigate to="/login" state={{ from: location.pathname }} />
             )

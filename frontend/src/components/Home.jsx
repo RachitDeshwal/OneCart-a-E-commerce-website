@@ -5,6 +5,9 @@ import Hero from "./Hero";
 import { useEffect } from "react";
 import Product from "../Pages/Product";
 import Title from "./Title";
+import OurPolicy from "./OurPolicy";
+import NewLetterBox from "./NewLetterBox";
+import Footer from "./Footer";
 
 const Home = () => {
   const [heroCount, setHeroCount] = useState(0);
@@ -32,6 +35,9 @@ const Home = () => {
         setHeroCount={setHeroCount}
       />
       <Product></Product>
+      <OurPolicy />
+      <NewLetterBox />
+      <Footer />
     </div>
   );
 };

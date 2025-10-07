@@ -19,7 +19,8 @@ import { useShopContext } from "../contexts/ShopContext";
 const Nav = () => {
   let navigate = useNavigate();
   const { userData } = useUserContext();
-  let { showSearch, setShowSearch, search, setSearch } = useShopContext();
+  let { showSearch, setShowSearch, search, setSearch, getCartCount } =
+    useShopContext();
   const [showProfile, setShowProfile] = useState(false);
   const { serverUrl } = useAuthContext();
   const handleLogout = async () => {
@@ -39,10 +40,13 @@ const Nav = () => {
         <h1 className="text-[25px] font-sans text-black">OneCart</h1>
       </div>
       <div className="flex-1 flex justify-center">
-        <ul className="flex justify-center items-center gap-[19px] relative left-[17%] text-white hidden md:flex">
+        <ul className=" justify-center items-center gap-[19px] relative left-[17%] text-white hidden md:flex">
           <li
             className="text-[15px] hover:bg-slate-500 bg-[#000000c9] py-[10px] px-[20px] rounded-2xl cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => {
+              showSearch && setShowSearch(false);
+              navigate("/");
+            }}
           >
             Home
           </li>
@@ -54,13 +58,19 @@ const Nav = () => {
           </li>
           <li
             className="text-[15px] hover:bg-slate-500 bg-[#000000c9] py-[10px] px-[20px] rounded-2xl cursor-pointer"
-            onClick={() => navigate("/about")}
+            onClick={() => {
+              showSearch && setShowSearch(false);
+              navigate("/about");
+            }}
           >
             About
           </li>
           <li
             className="text-[15px] hover:bg-slate-500 bg-[#000000c9] py-[10px] px-[20px] rounded-2xl cursor-pointer"
-            onClick={() => navigate("/contact")}
+            onClick={() => {
+              showSearch && setShowSearch(false);
+              navigate("/contact");
+            }}
           >
             Contact
           </li>
@@ -71,6 +81,7 @@ const Nav = () => {
           <IoSearchCircleSharp
             onClick={() => {
               setShowSearch((prev) => !prev);
+              navigate("/collection");
             }}
             className="cursor-pointer h-[38px] w-[38px] text-black hover:opacity-75 "
           />
@@ -79,6 +90,7 @@ const Nav = () => {
           <IoSearchCircleOutline
             onClick={() => {
               setShowSearch((prev) => !prev);
+              navigate("/collection");
             }}
             className="cursor-pointer h-[38px] w-[38px] text-black hover:opacity-70"
           />
@@ -101,9 +113,12 @@ const Nav = () => {
             {userData?.name.slice(0, 1).toUpperCase()}
           </div>
         )}
-        <BsCart className="cursor-pointer h-[30px] hover:opacity-70 w-[30px] hidden md:block text-black " />
+        <BsCart
+          className="cursor-pointer h-[30px] hover:opacity-70 w-[30px] hidden md:block text-black "
+          onClick={() => navigate("/cart")}
+        />
         <p className="h-[16px] w-[16px] text-white  bg-black absolute rounded-full hidden md:block items-center justify-center text-[9px] top-[18px] right-[25px] px-[2px] py-[2px] ">
-          10
+          {getCartCount()}
         </p>
       </div>
       {showSearch && (
@@ -112,6 +127,8 @@ const Nav = () => {
             type="text"
             className="lg:w-[50%] w-[80%] h-[60%] bg-[#233533] rounded-[30px] px-[50px] placeholder:text-white text-white text-[18px]"
             placeholder="Search here"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       )}
@@ -171,12 +188,15 @@ const Nav = () => {
           <MdPermContactCalendar className="w-[28px] h-[28px]" />
           Contact
         </button>
-        <button className="flex flex-col justify-around items-center mr-3 text-[12px] gap-[2px] cursor-pointer text-white">
-          <FaCartShopping className="w-[28px] h-[28px]" />
+        <button className="flex flex-col justify-around items-center mr-8 text-[12px] gap-[2px] cursor-pointer text-white">
+          <FaCartShopping
+            className="w-[28px] h-[28px]"
+            onClick={() => navigate("/cart")}
+          />
           Cart
         </button>
-        <p className="w-[18px] h-[18px] absolute justify-center items-center flex bg-white px-[5px] py-[2px] text-black font-semibold rounded-full text-[9px] top-[10px]  right-[9px] ">
-          10
+        <p className="w-[18px] h-[18px] absolute justify-center items-center flex bg-white px-[5px] py-[2px] text-black font-semibold rounded-full text-[9px] top-[10px]  right-[20px] ">
+          {getCartCount()}
         </p>
       </div>
     </div>
