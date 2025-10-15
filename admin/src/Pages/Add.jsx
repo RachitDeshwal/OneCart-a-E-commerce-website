@@ -1,4 +1,3 @@
-import React from "react";
 import Nav from "../Components/Nav.jsx";
 import Sidebar from "../Components/Sidebar.jsx";
 import uploadImage from "../assets/uploadimage.jpg";
@@ -6,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../Contexts/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Loading from "../Components/Loading.jsx";
 
 const Add = () => {

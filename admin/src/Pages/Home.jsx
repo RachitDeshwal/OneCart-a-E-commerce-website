@@ -1,4 +1,3 @@
-import React from "react";
 import Nav from "../Components/Nav.jsx";
 import Sidebar from "../Components/Sidebar.jsx";
 import { useAuthContext } from "../Contexts/AuthContext.jsx";
