@@ -30,7 +30,7 @@ const Collection = () => {
     let productCopy = products.slice();
     if (showSearch && search) {
       productCopy = productCopy.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
+        item.name.toLowerCase().includes(search)
       );
     }
     if (category.length > 0) {
