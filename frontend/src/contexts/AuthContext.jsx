@@ -2,14 +2,14 @@
 import { useContext, createContext } from "react";
 
 export const AuthContext = createContext({
-  serverUrl: "http://localhost:8000"
+  serverUrl: "https://onecart-a-e-commerce-website-backend.onrender.com"
 });
 
 export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
   const value = {
-    serverUrl: "http://localhost:8000"
+    serverUrl: "https://onecart-a-e-commerce-website-backend.onrender.com"
     // later you can add: user, login(), logout() etc.
   };
 
