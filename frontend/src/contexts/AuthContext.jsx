@@ -2,7 +2,7 @@
 import { useContext, createContext } from "react";
 
 export const AuthContext = createContext({
-  serverUrl: "http://localhost:8000"
+  serverUrl: "https://onecart-a-e-commerce-website-backend.onrender.com"
 });
 
 export const useAuthContext = () => useContext(AuthContext);
