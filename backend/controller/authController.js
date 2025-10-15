@@ -58,6 +58,7 @@ export const logOut = async (req, res) => {
 export const googleLogin = async (req, res) => {
   try {
     let { name, email } = req.body;
+    console.log(name);
     let user = await User.findOne({ email });
 
     if (!user) {
