@@ -87,7 +87,7 @@ function Order() {
                     </p>
                   </div>
                 </div>
-                <div className=" absolute md:right-[5%] right-[75%] bottom-[5%] md:bottom-[40%]">
+                <div className=" absolute md:right-[5%] sm:right-[5%]  bottom-[5%] md:bottom-[40%]">
                   <button
                     className="md:px-[15px] px-[5px] md:py-[7px] py-[3px] rounded-md bg-[#101919] text-[#f3f9fc] text-[11px] md:text-[16px] cursor-pointer active:bg-slate-500"
                     onClick={loadOrderData}

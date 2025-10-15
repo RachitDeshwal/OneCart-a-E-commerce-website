@@ -70,7 +70,7 @@ const Nav = () => {
             About
           </li>
           <li
-            className="text-[15px] hover:bg-slate-500 bg-[#000000c9] py-[10px] px-[20px] rounded-2xl cursor-pointer"
+            className="text-[15px] hover:bg-slate-500 bg-[#000000c9] py-[10px] px-[20px] rounded-2xl cursor-pointer hidden [@media(min-width:853px)]:block"
             onClick={() => {
               showSearch && setShowSearch(false);
               navigate("/contact");
@@ -121,7 +121,7 @@ const Nav = () => {
           className="cursor-pointer h-[30px] hover:opacity-70 w-[30px] hidden md:block text-black "
           onClick={() => navigate("/cart")}
         />
-        <p className="h-[16px] w-[16px] text-white  bg-black absolute rounded-full hidden md:block items-center justify-center text-[9px] top-[18px] right-[25px] px-[2px] py-[2px] ">
+        <p className="h-[16px] w-[16px] text-white  bg-black absolute rounded-full hidden md:block items-center justify-center text-[9px] top-[18px] right-[25px] px-[2px] py-[2px] text-center ">
           {getCartCount()}
         </p>
       </div>
@@ -205,7 +205,8 @@ const Nav = () => {
           />
           Cart
         </button>
-        <p className="w-[18px] h-[18px] absolute justify-center items-center flex bg-white px-[5px] py-[2px] text-black font-semibold rounded-full text-[9px] top-[10px]  right-[20px] ">
+
+        <p className="w-[18px] h-[18px] absolute justify-center items-center flex bg-white px-[5px] py-[2px] text-black  font-semibold rounded-full text-[9px] top-[10px] right-[20px]  ">
           {getCartCount()}
         </p>
       </div>
