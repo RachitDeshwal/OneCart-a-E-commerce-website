@@ -5,7 +5,7 @@ import { TbRosetteDiscountCheckFilled } from "react-icons/tb";
 import { BiSupport } from "react-icons/bi";
 function OurPolicy() {
   return (
-    <div className="w-[100vw] h-[100vh] md:h-[70vh] flex flex-col justify-start items-center gap-[50px] bg-gradient-to-l from-[#141414] to-[#0c2025]">
+    <div className="w-[99vw] h-[100vh] md:h-[70vh] flex flex-col justify-start items-center gap-[50px] bg-gradient-to-l from-[#141414] to-[#0c2025]">
       <div className="h-[8%] w-[100%] mt-[70px] text-center">
         <Title text1={"Our"} text2={"Policy"} />
         <p className="w-[100%] m-auto text-[13px] md:text-[20px] px-[10px] text-blue-100">

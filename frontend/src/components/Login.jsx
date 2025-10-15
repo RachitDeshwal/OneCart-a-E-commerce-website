@@ -10,10 +10,13 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/Firebase.js";
 import { useUserContext } from "../contexts/UserContext.jsx";
+import { ToastContainer, toast } from "react-toastify";
+import Loading from "./Loading.jsx";
 
 const Login = () => {
   const { getCurrentUser } = useUserContext();
   let navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const loginwithGoogle = async () => {
     try {
       const response = await signInWithPopup(auth, provider);
@@ -26,9 +29,11 @@ const Login = () => {
         { withCredentials: true }
       );
       console.log(result.data);
+      toast.success("Log in Successfully");
       getCurrentUser();
       navigate("/");
     } catch (e) {
+      toast.error("Log in failed");
       console.log(e);
     }
   };
@@ -38,6 +43,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const result = await axios.post(
@@ -45,8 +51,12 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-      console.log(result);
+      setLoading(false);
+      toast.success("Log in successfully");
+      navigate("/");
     } catch (err) {
+      setLoading(false);
+      toast.error("Log in Failed");
       console.log(err);
     }
   };
@@ -109,7 +119,7 @@ const Login = () => {
               />
             )}
             <button className="w-[100%] h-[50px] mt-[20px] rounded-lg flex items-center justify-center bg-green-600 cursor-pointer">
-              Log in
+              {loading ? <Loading /> : "Log in"}
             </button>
             <p className="flex gap-[10px] ">
               You haven't any Account?{" "}

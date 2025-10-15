@@ -5,10 +5,11 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import ExpressError from "./utils/ExpressError.js";
 import userRoute from "./routes/userRoutes.js";
-import ejs from "ejs";
+
 import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 app.all(/.*/, (req, res, next) => {
   next(new ExpressError(404, "Page not found!"));
 });

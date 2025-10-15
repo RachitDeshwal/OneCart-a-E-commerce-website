@@ -27,7 +27,7 @@ const Home = () => {
     { text1: "Explore out Best Collections ", text2: "Shop Now!" },
   ];
   return (
-    <div className="lg:h-[100vh] w-[100vw] md:h-[50vh] sm:h-[40vh] mt-[70px]   bg-gradient-to-l from-[#141414] to-[#0c2025]">
+    <div className="lg:h-[100vh] w-[99vw] md:h-[50vh] sm:h-[40vh] mt-[70px]   bg-gradient-to-l from-[#141414] to-[#0c2025]">
       <Background heroCount={heroCount} />
       <Hero
         heroCount={heroCount}

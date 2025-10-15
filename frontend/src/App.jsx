@@ -11,6 +11,11 @@ import Contact from "./Pages/Contact.jsx";
 import Product from "./Pages/Product.jsx";
 import ProductDetail from "./Pages/ProductDetail.jsx";
 import Cart from "./Pages/Cart.jsx";
+import PlaceOrder from "./Pages/PlaceOrder.jsx";
+import Order from "./Pages/Order.jsx";
+import { ToastContainer, toast } from "react-toastify";
+import NotFound from "./Pages/NotFound.jsx";
+import Ai from "./components/Ai.jsx";
 
 function App() {
   const { userData } = useUserContext();
@@ -18,6 +23,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       {userData && <Nav />}
 
       <Routes>
@@ -107,7 +113,29 @@ function App() {
             )
           }
         />
+        <Route
+          path="/placeorder"
+          element={
+            userData ? (
+              <PlaceOrder />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            userData ? (
+              <Order />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      <Ai />
     </>
   );
 }

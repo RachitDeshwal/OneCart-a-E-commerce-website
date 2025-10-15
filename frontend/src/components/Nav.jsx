@@ -15,10 +15,11 @@ import { MdCollections } from "react-icons/md";
 import { MdPermContactCalendar } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { useShopContext } from "../contexts/ShopContext";
+import { ToastContainer, toast } from "react-toastify";
 
 const Nav = () => {
   let navigate = useNavigate();
-  const { userData } = useUserContext();
+  const { userData, setUserData } = useUserContext();
   let { showSearch, setShowSearch, search, setSearch, getCartCount } =
     useShopContext();
   const [showProfile, setShowProfile] = useState(false);
@@ -28,13 +29,16 @@ const Nav = () => {
       const result = await axios.get(`${serverUrl}/api/auth/logout`, {
         withCredentials: true,
       });
-      console.log(result);
+      setUserData(null);
+
+      navigate("/login");
+      toast.success("Log out successfully");
     } catch (err) {
       console.log(err);
     }
   };
   return (
-    <div className="w-[100vw] h-[70px] bg-[#ecfafaec] fixed top-0 z-10 flex justify-between items-center px-[30px] shadow-md shadow-black">
+    <div className="w-[99vw] h-[70px] bg-[#ecfafaec] fixed top-0 z-10 flex justify-between items-center px-[30px] shadow-md shadow-black">
       <div className=" h-[80px] flex justify-start items-center px-[10px] gap-[10px] cursor-pointer">
         <img className="w-[40px]" src={logo} alt="" />
         <h1 className="text-[25px] font-sans text-black">OneCart</h1>
@@ -157,10 +161,16 @@ const Nav = () => {
                 Log out
               </li>
             )}
-            <li className="cursor-pointer w-[100%] px-[15px] py-[10px] hover:bg-[#2f2f2f] ">
+            <li
+              className="cursor-pointer w-[100%] px-[15px] py-[10px] hover:bg-[#2f2f2f] "
+              onClick={() => navigate("/order")}
+            >
               Orders
             </li>
-            <li className="cursor-pointer w-[100%] px-[15px] py-[10px] hover:bg-[#2f2f2f] ">
+            <li
+              className="cursor-pointer w-[100%] px-[15px] py-[10px] hover:bg-[#2f2f2f] "
+              onClick={() => navigate("/about")}
+            >
               About
             </li>
           </ul>

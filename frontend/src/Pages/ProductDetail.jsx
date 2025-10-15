@@ -4,9 +4,10 @@ import { useShopContext } from "../contexts/ShopContext";
 import { FaStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 import RelatedProduct from "../components/RelatedProduct";
+import Loading from "../components/Loading";
 
 function ProductDetail() {
-  let { products, addToCart } = useShopContext();
+  let { products, addToCart, loading } = useShopContext();
   let { productId } = useParams();
   let [productData, setProductData] = useState("");
   let [image, setImage] = useState("");
@@ -111,7 +112,7 @@ function ProductDetail() {
               className="text-[16px] active:bg-slate-500 cursor-pointer px-[20px] py-[10px] bg-[#495b61c9] rounded-2xl mt-[10px] border-[1px] border-[#80808049] text-white shadow-md shadow-black"
               onClick={() => addToCart(productData._id, size)}
             >
-              Add to Cart
+              {loading ? <Loading /> : "Add to Cart"}
             </button>
           </div>
           <div className="w-[90%] h-[1px] bg-slate-700"></div>

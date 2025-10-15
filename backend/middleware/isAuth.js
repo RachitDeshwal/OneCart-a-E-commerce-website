@@ -3,14 +3,14 @@ import jwt from "jsonwebtoken";
 export const isAuth = (req, res, next) => {
   try {
     const { token } = req.cookies;
-    console.log("Cookies received:", req.cookies); // debug
+    console.log(token);
 
     if (!token) {
       return res.status(401).json({ message: "No token provided" });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded token:", decoded); // debug
+    console.log(decoded.userId);
 
     req.userId = decoded.userId;
     next();
@@ -19,4 +19,4 @@ export const isAuth = (req, res, next) => {
     return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
-export default isAuth
+export default isAuth;

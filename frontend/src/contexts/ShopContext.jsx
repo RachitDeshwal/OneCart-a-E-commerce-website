@@ -3,12 +3,14 @@ import { useAuthContext } from "./AuthContext";
 import axios from "axios";
 import Card from "../components/Card";
 import { useUserContext } from "./UserContext";
+import { ToastContainer, toast } from "react-toastify";
 
 export const shopDataContext = createContext();
 
 function ShopContext({ children }) {
   let { userData } = useUserContext();
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [cartItem, setCartItem] = useState({});
   const [showSearch, setShowSearch] = useState(false);
@@ -32,8 +34,11 @@ function ShopContext({ children }) {
   };
   const addToCart = async (itemId, size) => {
     if (!size) {
+      toast.error("Please Select size");
       return;
     }
+    setLoading(true);
+
     let cartData = structuredClone(cartItem);
     if (cartData[itemId]) {
       if (cartData[itemId][size]) {
@@ -54,8 +59,11 @@ function ShopContext({ children }) {
           { itemId, size },
           { withCredentials: true }
         );
-        console.log(result);
+        setLoading(false);
+        toast.success("Item addes successfully");
       } catch (err) {
+        setLoading(false);
+        toast.error("Failed in add to cart");
         console.log(err);
       }
     }
@@ -106,7 +114,7 @@ function ShopContext({ children }) {
   const getCartAmount = () => {
     let totalAmount = 0;
     for (const items in cartItem) {
-      let itemInfo = products.map((product) => product._id == items);
+      let itemInfo = products.find((product) => product._id == items);
       for (const item in cartItem[items]) {
         try {
           if (cartItem[items][item] > 0) {
@@ -138,6 +146,7 @@ function ShopContext({ children }) {
     addToCart,
     updatedQuantity,
     getCartAmount,
+    loading,
   };
   return (
     <div>

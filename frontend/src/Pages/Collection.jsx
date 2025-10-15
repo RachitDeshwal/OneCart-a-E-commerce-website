@@ -70,7 +70,7 @@ const Collection = () => {
   }, [category, subCategory, showSearch, search]);
 
   return (
-    <div className="w-[100vw]  min-h-[100vh] flex flex-col justify-start items-start bg-gradient-to-l from-[#141414] to-[#0c2025] md:flex-row pt-[70px] overflow-x-hidden z-[2] ">
+    <div className="w-[99vw]  min-h-[100vh] flex flex-col justify-start items-start bg-gradient-to-l from-[#141414] to-[#0c2025] md:flex-row pt-[70px] overflow-x-hidden z-[2] ">
       <div className="md:w-[30vw]  lg:w-[20vw] w-[100vw] md:min-h-[100vw] p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed">
         <p
           className="text-[25px] font-semibold flex gap-[5px] cursor-pointer items-center justify-start"

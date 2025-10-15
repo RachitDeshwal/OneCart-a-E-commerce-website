@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import { useShopContext } from "../contexts/ShopContext";
 import { useNavigate } from "react-router-dom";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import CartTotal from "../components/CartTotal";
 
 function Cart() {
   const { products, cartItem, updatedQuantity } = useShopContext();
@@ -40,10 +42,59 @@ function Cart() {
                   className="w-[100px] h-[100px] rounded-md"
                   alt=""
                 />
+                <div className="flex items-start justify-center flex-col gap-[10px]">
+                  <p className="md:text-[25px] text-[20px] text-[#f3f9fc]">
+                    {productData.name}
+                  </p>
+                  <div className="flex items-center gap-[20px]">
+                    <p className="text-[20px] text-[#aaf4e7]">
+                      &#8377;{productData.price}
+                    </p>
+                    <p className="w-[40px] h-[40px] text-[16px] text-white bg-[#518080b4] rounded-md mt-[5px] flex items-center justify-center border-[1px] border-[#9ff9f9]">
+                      {item.size}
+                    </p>
+                  </div>
+                </div>
+                <input
+                  type="number"
+                  min={1}
+                  defaultValue={item.quantity}
+                  className="md:max-w-20 max-w-10 md:px-2 md:py-2 px-[10px] py-[5px] text-white text-[18px] font-semibold bg-[#515180b4] absolute md:top-[40%] top-[46%] md:left-[50%] left-[75%] border-[1px] border-[#9ff9f9] rounded-md"
+                  onChange={(e) =>
+                    e.target.value == "" || e.target.value == 0
+                      ? null
+                      : updatedQuantity(
+                          item._id,
+                          item.size,
+                          Number(e.target.value)
+                        )
+                  }
+                />
+                <RiDeleteBin5Line
+                  className="text-[#9ff9f9] h-[25px] w-[25px] absolute top-[50%] md:top-[40%] md:right-[5%] right-1 cursor-pointer"
+                  onClick={() => updatedQuantity(item._id, item.size, 0)}
+                />
               </div>
             </div>
           );
         })}
+      </div>
+      <div className="flex justify-start items-end my-20">
+        <div className="w-full sm:w-[450px]">
+          <CartTotal />
+          <button
+            className="text-[18px] hover:bg-slate-500 cursor-pointer bg-[#51808048] py-[10px] px-[50px] rounded-2xl text-white flex justify-center items-center gap-[20px] border-[1px] border-[#80808049] ml-[30px] mt-[20px] "
+            onClick={() => {
+              if (cartData.length > 0) {
+                navigate("/placeorder");
+              } else {
+                console.log("Your Cart is Empty");
+              }
+            }}
+          >
+            PROCEED TO CHECKOUT
+          </button>
+        </div>
       </div>
     </div>
   );

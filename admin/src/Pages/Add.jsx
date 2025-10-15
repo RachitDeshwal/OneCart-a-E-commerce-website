@@ -6,10 +6,13 @@ import { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../Contexts/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import Loading from "../Components/Loading.jsx";
 
 const Add = () => {
   let navigate = useNavigate();
   let { serverUrl } = useAuthContext();
+  const [loading, setLoading] = useState(false);
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -22,6 +25,7 @@ const Add = () => {
   const [description, setDescription] = useState("");
   const [sizes, setSizes] = useState([]);
   const handleAddProduct = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       let formData = new FormData();
@@ -41,6 +45,8 @@ const Add = () => {
         formData,
         { withCredentials: true }
       );
+      setLoading(false);
+      toast.success("Product added successfully");
       console.log(result);
       if (result) {
         setName("");
@@ -58,6 +64,8 @@ const Add = () => {
       navigate("/lists");
     } catch (err) {
       console.log(err);
+      toast.error("Failed in add product");
+      setLoading(false);
     }
   };
   return (
@@ -323,7 +331,7 @@ const Add = () => {
             </label>
           </div>
           <button className="w-[140px] cursor-pointer px-[15px] py-[15px] rounded-xl bg-[#65d8f7] flex items-center justify-center gap-[10px] text-black active:bg-slate-700 active:text-white active:border-[2px] ">
-            Add Product
+            {loading ? <Loading /> : "Add Product"}
           </button>
         </form>
       </div>
