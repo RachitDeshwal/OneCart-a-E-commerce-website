@@ -17,7 +17,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://onecart-a-e-commerce-website-frontend.onrender.com", "http://localhost:5174"], // no trailing slash
+    origin: [
+      "https://onecart-a-e-commerce-website-frontend.onrender.com",
+      "http://localhost:5173",
+    ], // no trailing slash
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
